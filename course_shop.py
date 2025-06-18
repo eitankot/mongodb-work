@@ -44,7 +44,7 @@ class ProductsManager:
         """
         return set(self.collection.distinct("color", {"categories": "shirts"}))
 
-    def count_all_products(self) -> Any :
+    def count_all_products_by_color(self) -> Any :
         """
         count all the products by color
         :return: Cursor of all products with the sum
