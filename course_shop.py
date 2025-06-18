@@ -30,12 +30,24 @@ class ProductsManager:
         return different_brands
 
     def get_all_categories(self) -> Set[str]:
+        """
+        get all the categories
+        :return: set of all categories
+        """
         return set(self.collection.distinct("categories"))
 
     def get_all_shirts_colors(self) -> Set[str]:
+        """
+        get all the shirts colors
+        :return: a set of all shirts colors
+        """
         return set(self.collection.distinct("color", {"categories": "shirts"}))
 
-    def count_all_products(self) :
+    def count_all_products(self) -> MongoClient.Cursor :
+        """
+        count all the products by color
+        :return: Cursor of all products with the sum
+        """
         pipeline = [
                 {"$unwind": "$color"},
                 {"$group": {"_id": "$color", "count": {"$sum": "$amount"}}},
