@@ -14,8 +14,11 @@ def create_collection() -> ProductsManager:
 
 def main():
     products_manager = create_collection()
-    print("The brands we have are:")
-    print(products_manager.get_brand_names())
+    # print("The brands we have are:")
+    # print(products_manager.get_brand_names())
+    print("get all categories")
+    print(products_manager.get_all_categories())
+
 
 
 if __name__ == '__main__':

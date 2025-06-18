@@ -27,3 +27,8 @@ class ProductsManager:
         all_products = list(self.collection.find())
         different_brands = set(product["brand"] for product in all_products)
         return different_brands
+
+    def get_all_categories(self) -> Set[str]:
+        all_products = list(self.collection.find())
+        different_categories = set(product["categories"] for product in all_products)
+        return different_categories
