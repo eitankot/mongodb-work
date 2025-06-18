@@ -14,6 +14,10 @@ def create_collection() -> ProductsManager:
     return products_manager
 
 def find_one_product(products_manager: ProductsManager) -> None:
+    a = products_manager.collection.find_one()
+    print(a)
+    a = products_manager.collection.find_one({"categories": "hat"})
+    print(a)
     print(products_manager.collection.find_one({"categories": "hat"}))
     print(products_manager.collection.find_one({"categories": "shirt", "price": 25}))
 
