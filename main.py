@@ -1,3 +1,4 @@
+from __future__ import annotations
 import json
 from pymongo import MongoClient
 from course_shop import ProductsManager
@@ -5,14 +6,24 @@ from course_shop import ProductsManager
 DB_NAME = "Products"
 COLLECTION_NAME = "Inventory"
 
-
-def main():
+def create_collection() -> ProductsManager:
     products_manager = ProductsManager()
     with open("products.json") as products_file:
         products_file_data = json.load(products_file)
     products_manager.insert_json_to_collection(DB_NAME, COLLECTION_NAME, products_file_data)
+    return products_manager
+
+def find_one_product(products_manager: ProductsManager) -> None:
+    products_manager.collection.find_one({"categories": "hat"})
+    products_manager.collection.find_one({"categories": "shirt", "price": 25})
+
+def main():
+    products_manager = create_collection()
     print("The brands we have are:")
     print(products_manager.get_brand_names(DB_NAME, COLLECTION_NAME))
+
+
+
 
 
 if __name__ == '__main__':
