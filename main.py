@@ -1,6 +1,7 @@
 import json
 from pymongo import MongoClient
 from course_shop import ProductsManager
+import pprint
 
 DB_NAME = "Products"
 COLLECTION_NAME = "Inventory"
@@ -21,7 +22,7 @@ def main():
     print("get all color types of shirts")
     print(products_manager.get_all_shirts_colors())
     print("get sums of all items")
-    print(products_manager.count_all_products())
+    pprint.pprint(list(products_manager.count_all_products()))
 
 
 

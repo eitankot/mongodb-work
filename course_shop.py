@@ -2,7 +2,6 @@ import json
 from pymongo import MongoClient
 from typing import Set
 
-
 class ProductsManager:
     def __init__(self, db_name: str, collection_name: str) -> None:
         self.client = MongoClient('127.0.0.1', 27017)
