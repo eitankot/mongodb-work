@@ -9,14 +9,16 @@ class ProductsManager:
         self.db = self.client[db_name]
         self.collection = self.db[collection_name]
 
-    def insert_json_to_collection(self,json_data) -> None:
+    def insert_json_to_collection(self, json_path: str) -> None:
         """
         insert json data into the collection of the mongodb
 
-        :param json_data: json data to add to the collection
+        :param json_path: json file path to add to the collection
         """
         inventory_collection = self.collection
-        inventory_collection.insert_many(json_data)
+        with open(json_path) as products_file:
+            json_file_data = json.load(products_file)
+        inventory_collection.insert_many(json_file_data)
 
     def get_brand_names(self) -> Set[str]:
         """
