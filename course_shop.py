@@ -1,6 +1,6 @@
 import json
 from pymongo import MongoClient
-from typing import Set
+from typing import Set, Any
 
 class ProductsManager:
     def __init__(self, db_name: str, collection_name: str) -> None:
@@ -43,7 +43,7 @@ class ProductsManager:
         """
         return set(self.collection.distinct("color", {"categories": "shirts"}))
 
-    def count_all_products(self) -> MongoClient.Cursor :
+    def count_all_products(self) -> Any :
         """
         count all the products by color
         :return: Cursor of all products with the sum
