@@ -33,3 +33,10 @@ class ProductsManager:
 
     def get_all_shirts_colors(self) -> Set[str]:
         return set(self.collection.distinct("color", {"categories": "shirts"}))
+
+    def count_all_products(self) :
+        pipeline = [
+                {"$unwind": "$tags"},
+                {"$group": {"_id": "$color", "count": {"$sum": "$amount"}}},
+        ]
+        self.collection.aggregate(pipeline)
