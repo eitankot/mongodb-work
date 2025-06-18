@@ -9,7 +9,7 @@ class ProductsManager:
         self.db = self.client[db_name]
         self.collection = self.db[collection_name]
 
-    def insert_json_to_collection(self,json_data) -> None:
+    def insert_json_to_collection(self, json_data) -> None:
         """
         insert json data into the collection of the mongodb
 
