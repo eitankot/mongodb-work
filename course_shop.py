@@ -1,6 +1,6 @@
 import json
 from pymongo import MongoClient
-from typing import Set, Dict
+from typing import Set
 
 
 class ProductsManager:
