@@ -18,6 +18,8 @@ def main():
     # print(products_manager.get_brand_names())
     print("get all categories")
     print(products_manager.get_all_categories())
+    print("get all color types of shirts")
+    print(products_manager.get_all_shirts_colors())
 
 
 
