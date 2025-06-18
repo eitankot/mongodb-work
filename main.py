@@ -21,6 +21,7 @@ def main():
     products_manager = create_collection()
     print("The brands we have are:")
     print(products_manager.get_brand_names())
+    find_one_product(products_manager)
 
 
 
