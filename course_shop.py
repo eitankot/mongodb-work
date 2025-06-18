@@ -20,30 +20,6 @@ class ProductsManager:
             json_file_data = json.load(products_file)
         inventory_collection.insert_many(json_file_data)
 
-    def get_brand_names(self) -> Set[str]:
-        """
-        gets all the brand name
-
-        :return : set of different brands
-        """
-        all_products = list(self.collection.find())
-        different_brands = set(product["brand"] for product in all_products)
-        return different_brands
-
-    def get_all_categories(self) -> Set[str]:
-        """
-        get all the categories
-        :return: set of all categories
-        """
-        return set(self.collection.distinct("categories"))
-
-    def get_all_shirts_colors(self) -> Set[str]:
-        """
-        get all the shirts colors
-        :return: a set of all shirts colors
-        """
-        return set(self.collection.distinct("color", {"categories": "shirts"}))
-
     def count_all_products_by_color(self) -> Any :
         """
         count all the products by color
@@ -53,5 +29,12 @@ class ProductsManager:
                 {"$unwind": "$color"},
                 {"$group": {"_id": "$color", "count": {"$sum": "$amount"}}},
                 {"$sort": SON([("count", -1), ("_id", -1)])},
+        ]
+        return self.collection.aggregate(pipeline)
+
+    def change_sales(self) -> Any:
+        pipeline = [
+            {"match": {"$brand": "Castro"}},
+            {"$set": {"$price": {"$multiply": ["$price", 0.9]}}},
         ]
         return self.collection.aggregate(pipeline)
