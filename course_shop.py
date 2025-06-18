@@ -29,4 +29,4 @@ class ProductsManager:
         return different_brands
 
     def get_all_categories(self) -> Set[str]:
-        return set(self.collection.distinct("category"))
+        return set(self.collection.distinct("categories"))
