@@ -20,6 +20,8 @@ def main():
     print(products_manager.get_all_categories())
     print("get all color types of shirts")
     print(products_manager.get_all_shirts_colors())
+    print("get sums of all items")
+    print(products_manager.count_all_products())
 
 
 

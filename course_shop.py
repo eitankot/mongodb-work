@@ -39,4 +39,4 @@ class ProductsManager:
                 {"$unwind": "$tags"},
                 {"$group": {"_id": "$color", "count": {"$sum": "$amount"}}},
         ]
-        self.collection.aggregate(pipeline)
+        return self.collection.aggregate(pipeline)
