@@ -1,6 +1,7 @@
 import json
 from pymongo import MongoClient
 from typing import Set, Any
+from bson.son import SON
 
 class ProductsManager:
     def __init__(self, db_name: str, collection_name: str) -> None:
@@ -51,6 +52,6 @@ class ProductsManager:
         pipeline = [
                 {"$unwind": "$color"},
                 {"$group": {"_id": "$color", "count": {"$sum": "$amount"}}},
-                {"$sort": [("count", -1), ("_id", -1)]},
+                {"$sort": SON([("count", -1), ("_id", -1)])},
         ]
         return self.collection.aggregate(pipeline)
