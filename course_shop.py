@@ -35,7 +35,7 @@ class ProductsManager:
 
     def count_all_products(self) :
         pipeline = [
-                {"$unwind": "$tags"},
+                {"$unwind": "$color"},
                 {"$group": {"_id": "$color", "count": {"$sum": "$amount"}}},
         ]
         return self.collection.aggregate(pipeline)
