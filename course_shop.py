@@ -29,18 +29,33 @@ class ProductsManager:
         different_brands = set(product["brand"] for product in all_products)
         return different_brands
 
-    def fix_price(self, product_category: str, key: str, value: Any) -> None:
+    def set_fixed_price(self, product_category: str, key: str, value: Any) -> None:
+        """
+        Sets a fixed value of all keys for a specific category.
+        :param product_category: The category to change.
+        :param key: The key to find and update per each product of the category.
+        :param value: The value to set to all the keys.
+        """
         query = {"categories": product_category}
         new_values = {"$set": {key: value}}
         self.collection.update_many(query, new_values)
 
     def update_max_to_min(self, product_category: str, key: str) -> None:
+        """
+        Sets the minimum value of a key in a category to the maximum value of a key in the same category.
+        :param product_category: The category to swap in.
+        :param key: The key to swap between the two products.
+        """
         min_doc_value = self.collection.find_one({"categories": product_category}, sort=[(key, 1)])[key]
         max_doc = self.collection.find_one({"categories": product_category}, sort=[(key, -1)])
         max_update = {"$set": {key: min_doc_value}}
         self.collection.update_one(max_doc, max_update)
 
-    def change_value_for_all(self, value_name: str, difference: int):
-        change_update = {"$inc": {value_name: difference}}
-        for product in self.collection.find():
-            self.collection.update_one(product, change_update)
+    def change_value_for_all(self, key: str, difference: int) -> None:
+        """
+        Updates the value to all the products in the collection.
+        :param key: The key to add or sub from. Must hold a numeric value.
+        :param difference: The amount to add or sub.
+        """
+        change_update = {"$inc": {key: difference}}
+        self.collection.update_many({}, change_update)

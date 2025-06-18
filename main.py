@@ -39,7 +39,7 @@ def test_change_all(products_manager: ProductsManager) -> None:
     print(f"AFTER: item {after_id} in price {after_price}")
 
 def test_fix_price(products_manager: ProductsManager):
-    products_manager.fix_price("ties", "price", 20)
+    products_manager.set_fixed_price("ties", "price", 20)
     print("ties that are not 20 (supposed to be []):")
     print(list(tie for tie in products_manager.collection.find({"categories": "ties", "price": {"$ne": 20}})))
 
