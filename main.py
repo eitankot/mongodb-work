@@ -1,6 +1,6 @@
 import json
 from pymongo import MongoClient
-from CourseShop import ProductsManager
+from course_shop import ProductsManager
 
 DB_NAME = "Products"
 COLLECTION_NAME = "Inventory"
