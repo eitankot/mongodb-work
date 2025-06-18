@@ -36,7 +36,5 @@ class ProductsManager:
         pipeline = [
             {"$match": {"brand": "Castro"}},
             {"$set": {"price": {"$multiply": ["$price", 0.9]}}},
-            {"$match": {"brand": "Renuar"}},
-            {"$set": {"price": {"$multiply": ["$price", 0.7]}}},
         ]
         return self.collection.aggregate(pipeline)
