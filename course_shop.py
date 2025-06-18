@@ -32,4 +32,4 @@ class ProductsManager:
         return set(self.collection.distinct("categories"))
 
     def get_all_shirts_colors(self) -> Set[str]:
-        return set(self.collection.distinct("colors", {"categories": "shirts"}))
+        return set(self.collection.distinct("color", {"categories": "shirts"}))
