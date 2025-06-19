@@ -26,4 +26,4 @@ class ProductsManager:
 
         :return : set of different brands
         """
-        return set(self.collection.distinct("brands"))
+        return set(self.collection.distinct("brand"))
