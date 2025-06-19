@@ -39,7 +39,7 @@ def find_three_products(products_manager: ProductsManager) -> List[Any]:
     return list_three_products
 
 
-def find_cheaper_than_30(products_manager: ProductsManager, min_price: int) -> List[Any]:
+def find_cheaper_than_min_price(products_manager: ProductsManager, min_price: int) -> List[Any]:
     """
     finds and prints all the products cheaper than 30
     """
@@ -85,6 +85,11 @@ def main():
     products_manager = create_collection()
     products_manager.client.drop_database(DB_NAME)
     products_manager.insert_json_to_collection("products.json")
+    find_all_shirts(products_manager)
+    find_three_products(products_manager)
+    find_cheaper_than_min_price(products_manager, 30)
+    find_pants_in_price_range(products_manager, 80, 150)
+    find_ties_and_suits(products_manager)
     amount_of_products(products_manager)
 
 
