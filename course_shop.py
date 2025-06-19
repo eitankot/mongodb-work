@@ -34,7 +34,30 @@ class ProductsManager:
 
     def change_sales(self) -> Any:
         pipeline = [
-            {"$match": {"brand": "Castro"}},
-            {"$set": {"price": {"$multiply": ["$price", 0.9]}}},
+            {
+                "$facet": {
+                    "pipeline1":[
+                        {"$match": {"brand": "Castro"}},
+                        {"$set": {"price": {"$multiply": ["$price", 0.9]}}}
+                    ],
+                    "pipeline2": [
+                        {"$match": {"brand": "Renuar"}},
+                        {"$set": {"price": {"$multiply": ["$price", 0.7]}}}
+                    ],
+                    "pipeline3": [
+                        {"$match": {"brand": "CourseShop"}},
+                        {"$set": {"price": {"$multiply": ["$price", 0.5]}}}
+                    ],
+                    "pipeline4": [
+                        {"$match": {"brand": "Zara"}},
+                        {"$set": {"price": {"$multiply": ["$price", 0.8]}}}
+                    ],
+                    "pipeline5": [
+                        {"$match": {"brand": "Fox"}},
+                        {"$set": {"price": {"$multiply": ["$price", 0.6]}}}
+                    ]
+                }
+            }
+
         ]
         return self.collection.aggregate(pipeline)
