@@ -20,39 +20,27 @@ class ProductsManager:
             json_file_data = json.load(products_file)
         inventory_collection.insert_many(json_file_data)
 
-    def count_all_products_by_color(self) -> Any :
-        """
-        count all the products by color
-        :return: Cursor of all products with the sum
-        """
-        pipeline = [
-                {"$unwind": "$color"},
-                {"$group": {"_id": "$color", "count": {"$sum": "$amount"}}},
-                {"$sort": SON([("count", -1), ("_id", -1)])},
-        ]
-        return self.collection.aggregate(pipeline)
-
     def change_sales(self) -> Any:
         pipeline = [
             {
                 "$facet": {
-                    "pipeline1":[
+                    "CastroSales":[
                         {"$match": {"brand": "Castro"}},
                         {"$set": {"price": {"$multiply": ["$price", 0.9]}}}
                     ],
-                    "pipeline2": [
+                    "RenuarSales": [
                         {"$match": {"brand": "Renuar"}},
                         {"$set": {"price": {"$multiply": ["$price", 0.7]}}}
                     ],
-                    "pipeline3": [
+                    "CourseShopSales": [
                         {"$match": {"brand": "CourseShop"}},
                         {"$set": {"price": {"$multiply": ["$price", 0.5]}}}
                     ],
-                    "pipeline4": [
+                    "ZaraSales": [
                         {"$match": {"brand": "Zara"}},
                         {"$set": {"price": {"$multiply": ["$price", 0.8]}}}
                     ],
-                    "pipeline5": [
+                    "FoxSales": [
                         {"$match": {"brand": "Fox"}},
                         {"$set": {"price": {"$multiply": ["$price", 0.6]}}}
                     ]
