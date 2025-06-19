@@ -51,6 +51,5 @@ class ProductsManager:
         """
         pipeline = [
                 {"$group": {"_id": "$color", "count": {"$sum": "$amount"}}},
-                {"$sort": SON([("count", -1), ("_id", -1)])},
         ]
         return self.collection.aggregate(pipeline)
