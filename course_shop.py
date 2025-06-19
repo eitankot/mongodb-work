@@ -24,6 +24,4 @@ class ProductsManager:
 
         :return : set of different brands
         """
-        all_products = list(self.collection.find())
-        different_brands = set(product["brand"] for product in all_products)
-        return different_brands
+        return set(self.collection.distinct("brands"))
