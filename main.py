@@ -14,8 +14,6 @@ def main():
     products_manager = create_collection()
     products_manager.client.drop_database(DB_NAME)
     products_manager.insert_json_to_collection("products.json")
-    # print("The brands we have are:")
-    # print(products_manager.get_brand_names())
     print("get all categories")
     print(products_manager.get_all_categories())
     print("get all color types of shirts")

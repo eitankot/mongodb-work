@@ -50,8 +50,7 @@ class ProductsManager:
         :return: Cursor of all products with the sum
         """
         pipeline = [
-                {"$unwind": "$color"},
                 {"$group": {"_id": "$color", "count": {"$sum": "$amount"}}},
-                {"$sort": SON([("count", -1), ("_id", -1)])},
+                {"$sort": ([("count", -1), ("_id", -1)])},
         ]
         return self.collection.aggregate(pipeline)
