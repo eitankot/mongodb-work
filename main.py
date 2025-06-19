@@ -65,7 +65,8 @@ def find_ties_and_suits(products_manager: ProductsManager) -> List[Any]:
     finds and prints all ties and suits
     """
     print("prints all the ties and suits")
-    list_pants_in_price_range = list(products_manager.collection.find({'categories': 'suits'}, {'categories': 'ties'}))
+    categories_items = ['suits', 'ties']
+    list_pants_in_price_range = list(products_manager.collection.find({'categories':{"$in": categories_items} }))
     print(f"!!!!!!!!!\n{list_pants_in_price_range}\n!!!!!!!\n")
     return list_pants_in_price_range
 
