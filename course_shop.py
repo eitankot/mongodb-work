@@ -20,13 +20,3 @@ class ProductsManager:
             json_file_data = json.load(products_file)
         inventory_collection.insert_many(json_file_data)
 
-    def get_brand_names(self) -> Set[str]:
-        """
-        gets all the brand name
-
-        :return : set of different brands
-        """
-        all_products = list(self.collection.find())
-        different_brands = set(product["brand"] for product in all_products)
-        return different_brands
-

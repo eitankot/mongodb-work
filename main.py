@@ -32,7 +32,7 @@ def find_products_by_query(products_manager: ProductsManager) -> None:
     list_pants_in_price_range = list(products_manager.collection.find({'categories': 'pants','price': {'$lt': 150, '$gt': 80}}))
     print(f"!!!!!!!!!\n{list_pants_in_price_range}\n!!!!!!!\n")
     print("prints all the ties and suits")
-    list_pants_in_price_range = list(products_manager.collection.find({'$or': [{'categories': 'suits'}, {'categories': 'ties'}]}))
+    list_pants_in_price_range = list(products_manager.collection.find({'categories': 'suits'}, {'categories': 'ties'}))
     print(f"!!!!!!!!!\n{list_pants_in_price_range}\n!!!!!!!\n")
     print("prints amount of products in the store")
     count_products = products_manager.collection.count_documents({})
